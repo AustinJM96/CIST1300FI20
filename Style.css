@@ -1,0 +1,45 @@
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width:50%;
+}
+
+li {
+    display: inline-block;\
+    text-align: center; 
+    margin-left:100px;
+    margin-right:100px;
+    font-family:cursive;
+}
+.model { 
+    margin-left:400px;
+    margin-right:400px;
+}
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.welcome {
+    font-size: 30px;
+    margin-left:400px;
+    margin-right:400px;
+}
+.book {
+    font-size: 20px;
+    margin-left:400px;
+    margin-right:400px;
+}
+body {
+    background-color: antiquewhite
+}
+header{
+  font-weight: bold;  
+}
+.textwrap{
+float: left;
+margin: 10px;
+}
