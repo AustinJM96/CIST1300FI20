@@ -61,7 +61,10 @@ tr {
     background-color: crimson
 }
 
-td {}
+td {
+    font-family: serif;
+    font-size: 40px;
+}
 
 .test1 {
     font-family: cursive;
