@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Generate Countries table </title>
+    <link rel="stylesheet" type="text/css" href="Ass8Style.css">
+    <center>
+        <H1>Austin's Country List</H1>
+    </center>
+</head>
+
+<body>
+    <center>
+        <table class="float-container">
+
+            <tr>
+                <td><label id="Number1lbl" for="Number1lbl">Max Number of Countries</label></td>
+                <td><input type="text" id="maxctryNumber" placeholder="3"></td>
+            </tr>
+            <tr>
+                <td><label id="Number1lbl" for="Number1lbl">Country Name</label></td>
+                <td><input type="text" id="ctryNametxt" placeholder="Country Name"></td>
+            </tr>
+            <tr>
+                <td><label id="Number2lbl" for="Number2lbl">CountryCapital</label></td>
+                <td><input type="text" id="ctryCapitaltxt" placeholder="Country Capital"></td>
+            </tr>
+            <tr>
+                <td><label id="Number3lbl" for="Number3lbl">CountryPopulation</label></td>
+                <td><input type="text" id="ctryPoplntxt" placeholder="1,000,000"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="addcountry" onclick="addcountry(); resetctry(); resetcptl(); resetpopln()">Add country</button></td>
+                <td><button type="button" id="generatectry" onclick="generatecountrieslist()">Generate Countries</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="sortcountryasc" onclick="sortcountries()">Country Ascending</button></td>
+                <td><button type="button" id="sortcptlasc" onclick="sortcapital()">Capital Ascending</button></td>
+            </tr>
+        </table>
+    </center>
+
+    <br><br><br>
+    <div class="float-child" id="tableContent"></div>
+    <div class="float-child" id="ascendingcountry"></div>
+    <div class="float-child" id="ascendingcapital"></div>
+    <script>
+        var defaultcountrylist = 3;
+        var userinputcountry = ["Norway", "Sweden", "Denmark"];
+        var userinputcptl = ["Oslo", "Stockholm", "Copenhagen"];
+        let countrylist = [{
+                "name": "Norway",
+                "capital": "Oslo",
+                "population": "5,421,000",
+
+            },
+            {
+                "name": "Sweden",
+                "capital": "Stockholm.",
+                "population": "10,100,000",
+            },
+            {
+                "name": "Denmark",
+                "capital": "Copenhagen",
+                "population": "5,800,000",
+            }
+        ];
+
+        function addcountry() {
+            var lcladdedcountry = document.getElementById('ctryNametxt').value;
+            var lcladdedcptl = document.getElementById('ctryCapitaltxt').value;
+            var lclpopln = document.getElementById('ctryPoplntxt').value;
+            userinputcountry.push(lcladdedcountry);
+            userinputcptl.push(lcladdedcptl);
+            alert(lcladdedcountry + " with the capital " + lcladdedcptl + " and a population of " + lclpopln + " was added to the list!");
+            defaultcountrylist++;
+            countrylist.push({
+                        "name": lcladdedcountry,
+                        "capital": lcladdedcptl,
+                        "population": lclpopln
+                        //*Duplicates//
+                    });
+            
+        }
+                
+
+                    function resetctry() {
+                        document.getElementById('ctryNametxt').value = "";
+                    }
+
+                    function resetcptl() {
+                        document.getElementById('ctryCapitaltxt').value = "";
+                    }
+
+                    function resetpopln() {
+                        document.getElementById('ctryPoplntxt').value = "";
+                    }
+
+                    function generatecountries() {
+
+                        const tmpl = (userinputcountry, userinputcptl) => `
+				<table><thead>
+				<tr><th>Country<th>Capital<tbody>
+				${userinputcountry.map( (cell, index) => `
+					<tr><td>${cell}<td>${userinputcptl[index]}</tr>
+				`).join('')}
+				</table>`;
+
+                        tableContent.innerHTML = tmpl(userinputcountry, userinputcptl);
+                    }
+
+                    function generatecountrieslist() {
+                        var tbody = document.getElementById('tbody');
+                        var tableHTML = "<center><table><thead><tr><th>Country<th>Capital<th>Population</thead><tbody></center>";
+                        var i;
+                        for (i = 0; i < countrylist.length; i++) {
+                            tableHTML += "<tr>";
+                            tableHTML += "<td>" + countrylist[i].name + "</td>"
+                            tableHTML += "<td>" + countrylist[i].capital + "</td>"
+                            tableHTML += "<td>" + countrylist[i].population + "</td>"
+                        }
+                        tableHTML += "</tbody></table>";
+                        tableContent.innerHTML = tableHTML;
+                    }
+
+                    function sortcountries() {
+                        countrylist.sort((a, b) => {
+                            let fa = a.name.toLowerCase(),
+                                fb = b.name.toLowerCase();
+                            if (fa < fb) {
+                                return -1;
+                            }
+                            if (fa > fb) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                        var tbody = document.getElementById('tbody');
+                        var tableHTML = "<center><table><thead><tr><th>Country<th>Capital<th>Population</thead><tbody></center>";
+                        var i;
+                        for (i = 0; i < countrylist.length; i++) {
+                            tableHTML += "<tr>";
+                            tableHTML += "<td>" + countrylist[i].name + "</td>"
+                            tableHTML += "<td>" + countrylist[i].capital + "</td>"
+                            tableHTML += "<td>" + countrylist[i].population + "</td>"
+                        }
+                        tableHTML += "</tbody></table>";
+                        tableContent.innerHTML = tableHTML;
+                    }
+
+                    function sortcapital() {
+
+                        countrylist.sort((a, b) => {
+                            let ca = a.capital.toLowerCase(),
+                                cb = b.capital.toLowerCase();
+                            if (ca < cb) {
+                                return -1;
+                            }
+                            if (ca > cb) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                        var tbody = document.getElementById('tbody');
+                        var tableHTML = "<center><table><thead><tr><th>Country<th>Capital<th>Population</thead><tbody></center>";
+                        var i;
+                        for (i = 0; i < countrylist.length; i++) {
+                            tableHTML += "<tr>";
+                            tableHTML += "<td>" + countrylist[i].name + "</td>"
+                            tableHTML += "<td>" + countrylist[i].capital + "</td>"
+                            tableHTML += "<td>" + countrylist[i].population + "</td>"
+                        }
+                        tableHTML += "</tbody></table>";
+                        tableContent.innerHTML = tableHTML;
+                    }
+    </script>
+</body></html>

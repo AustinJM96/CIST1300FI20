@@ -1,0 +1,36 @@
+body {
+    background-color: white;
+}
+
+H1 {
+    background-color: orangered;
+    font-weight: bold;
+}
+
+td {
+    font-weight: bold
+}
+
+table {
+    border-color: forestgreen;
+    border-style: solid;
+    border-spacing: 15px;
+    background-color: darkgoldenrod
+}
+
+button {
+    font-weight: bold
+}
+
+.float-container {
+    float: left;
+    margin-left: 600px;
+    background-color: white;
+    border: solid black
+}
+
+.float-child {
+    float: right;
+    margin-right: 600px;
+    background-color: white;
+}
